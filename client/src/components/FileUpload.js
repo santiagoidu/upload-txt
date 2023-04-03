@@ -34,12 +34,12 @@ const FileUpload = () => {
         },
       });
 
-      const { fileName, filePath } = await res.data;
+      const { fileName, filePath } = res.data;
       setUploadedFile({ fileName, filePath });
       setMessage("File uploaded");
 
       // Read file content and store it in the state
-      const reader = await new FileReader();
+      const reader = new FileReader();
       reader.onload = () => {
         setFileContent(reader.result);
       };
@@ -52,7 +52,6 @@ const FileUpload = () => {
       }
     }
   };
-
   return (
     <Fragment>
       {message ? <Message msg={message} /> : null}
@@ -90,7 +89,9 @@ const FileUpload = () => {
             >
               Link para download
             </a>
-            <button onClick={() => window.open(uploadedFile.filePath)}>Open</button>
+            <button onClick={() => window.open(uploadedFile.filePath, "_blank")}>
+              Open in new tab
+            </button>
           </div>
         </div>
       ) : null}
